@@ -14,7 +14,10 @@ namespace CamposProject.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Cliente>().ToTable("Clientes");
-         
+            modelBuilder.Entity<Produto>().ToTable("Produtos");
+
         }
+
+        public DbSet<Produto> Produto { get; set; }
     }
 }

@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CamposProject.Entidades
 {
-    public class Cliente
+    public class Produto
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int IdCliente { get; set; }
-        public string NmCliente { get; set; }
-        public string Cidade { get; set; }
+        public int IdProduto { get; set; }
+        public string DscProduto { get; set; }
+        public float VlrProduto { get; set; }
     }
 }

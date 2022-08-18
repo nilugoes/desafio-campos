@@ -1,28 +1,31 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CamposProject.Data;
 using CamposProject.Entidades;
 
 namespace CamposProject.Controllers
 {
-    public class ClientesController : Controller
+    public class ProdutosController : Controller
     {
         private readonly CamposDatabaseContext _context;
 
-        public ClientesController(CamposDatabaseContext context)
+        public ProdutosController(CamposDatabaseContext context)
         {
             _context = context;
         }
 
-        // GET: Clientes
+        // GET: Produtos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clientes.ToListAsync());
+            return View(await _context.Produto.ToListAsync());
         }
 
-        // GET: Clientes/Details/5
+        // GET: Produtos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -30,39 +33,39 @@ namespace CamposProject.Controllers
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.IdCliente == id);
-            if (cliente == null)
+            var produto = await _context.Produto
+                .FirstOrDefaultAsync(m => m.IdProduto == id);
+            if (produto == null)
             {
                 return NotFound();
             }
 
-            return View(cliente);
+            return View(produto);
         }
 
-        // GET: Clientes/Create
+        // GET: Produtos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Clientes/Create
+        // POST: Produtos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCliente,NmCliente,Cidade")] Cliente cliente)
+        public async Task<IActionResult> Create([Bind("IdProduto,DscProduto,VlrProduto")] Produto produto)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(cliente);
+                _context.Add(produto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return View(produto);
         }
 
-        // GET: Clientes/Edit/5
+        // GET: Produtos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -70,22 +73,22 @@ namespace CamposProject.Controllers
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes.FindAsync(id);
-            if (cliente == null)
+            var produto = await _context.Produto.FindAsync(id);
+            if (produto == null)
             {
                 return NotFound();
             }
-            return View(cliente);
+            return View(produto);
         }
 
-        // POST: Clientes/Edit/5
+        // POST: Produtos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCliente,NmCliente,Cidade")] Cliente cliente)
+        public async Task<IActionResult> Edit(int id, [Bind("IdProduto,DscProduto,VlrProduto")] Produto produto)
         {
-            if (id != cliente.IdCliente)
+            if (id != produto.IdProduto)
             {
                 return NotFound();
             }
@@ -94,12 +97,12 @@ namespace CamposProject.Controllers
             {
                 try
                 {
-                    _context.Update(cliente);
+                    _context.Update(produto);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClienteExists(cliente.IdCliente))
+                    if (!ProdutoExists(produto.IdProduto))
                     {
                         return NotFound();
                     }
@@ -110,10 +113,10 @@ namespace CamposProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return View(produto);
         }
 
-        // GET: Clientes/Delete/5
+        // GET: Produtos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -121,30 +124,30 @@ namespace CamposProject.Controllers
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.IdCliente == id);
-            if (cliente == null)
+            var produto = await _context.Produto
+                .FirstOrDefaultAsync(m => m.IdProduto == id);
+            if (produto == null)
             {
                 return NotFound();
             }
 
-            return View(cliente);
+            return View(produto);
         }
 
-        // POST: Clientes/Delete/5
+        // POST: Produtos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
-            _context.Clientes.Remove(cliente);
+            var produto = await _context.Produto.FindAsync(id);
+            _context.Produto.Remove(produto);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClienteExists(int id)
+        private bool ProdutoExists(int id)
         {
-            return _context.Clientes.Any(e => e.IdCliente == id);
+            return _context.Produto.Any(e => e.IdProduto == id);
         }
     }
 }
