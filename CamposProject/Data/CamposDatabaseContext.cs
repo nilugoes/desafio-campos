@@ -11,13 +11,16 @@ namespace CamposProject.Data
         }
 
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Produto> Produto { get; set; }
+        public DbSet<Venda> Vendas { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Cliente>().ToTable("Clientes");
             modelBuilder.Entity<Produto>().ToTable("Produtos");
+            modelBuilder.Entity<Venda>().ToTable("Vendas");
 
         }
 
-        public DbSet<Produto> Produto { get; set; }
+
     }
 }
