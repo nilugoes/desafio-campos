@@ -16,11 +16,16 @@ namespace CamposProject.Controllers
             _context = context;
         }
 
-        // GET: Clientes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string filtro = null)
         {
-            return View(await _context.Clientes.ToListAsync());
+            var model = await _context.Clientes
+                            .Where(c => filtro == null || c.NmCliente.Contains(filtro))
+                            .ToListAsync();
+
+            return View(model);
         }
+
+      
 
         // GET: Clientes/Details/5
         public async Task<IActionResult> Details(int? id)

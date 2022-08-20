@@ -9,6 +9,21 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index" method="get">
+            <div class="form-group">
+                <input name="Filtro" class="form-control" placeholder="Busca por nome do cliente ou descrição do produto" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Buscar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -34,32 +49,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cliente.IdCliente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Produto.IdProduto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QtdVenda)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VlrUnitarioVenda)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DthVenda)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VlrTotalVenda)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdVenda">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdVenda">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdVenda">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cliente.NmCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Produto.DscProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QtdVenda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VlrUnitarioVenda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DthVenda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VlrTotalVenda)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdVenda">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdVenda">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdVenda">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

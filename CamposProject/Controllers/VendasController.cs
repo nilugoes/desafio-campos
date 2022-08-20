@@ -20,12 +20,16 @@ namespace CamposProject.Controllers
         }
 
         // GET: Vendas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string filtro = null)
         {
-            var camposDatabaseContext = _context.Vendas.Include(v => v.Cliente).Include(v => v.Produto);
-            return View(await camposDatabaseContext.ToListAsync());
-        }
+            var model = await _context.Vendas
+                    .Include(v => v.Cliente)
+                    .Include(v => v.Produto)
+                    .Where(v => filtro == null || v.Produto.DscProduto.Contains(filtro) || v.Cliente.NmCliente.Contains(filtro))
+                    .ToListAsync();
 
+            return View(model);
+        }
         // GET: Vendas/Details/5
         public async Task<IActionResult> Details(int? id)
         {

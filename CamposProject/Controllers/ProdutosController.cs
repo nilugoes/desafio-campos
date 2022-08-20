@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CamposProject.Data;
 using CamposProject.Entidades;
@@ -18,13 +15,15 @@ namespace CamposProject.Controllers
         {
             _context = context;
         }
-
-        // GET: Produtos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string filtro = null)
         {
-            return View(await _context.Produto.ToListAsync());
-        }
+            var model = await _context.Produto
+                            .Where(p => filtro == null || p.DscProduto.Contains(filtro))
+                            .ToListAsync();
 
+            return View(model);
+        }
+        
         // GET: Produtos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
