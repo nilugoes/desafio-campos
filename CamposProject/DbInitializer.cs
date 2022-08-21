@@ -13,6 +13,9 @@ namespace CamposProject
             ProdutosService produtosService = new ProdutosService(context);
             produtosService.ImportarDados();
 
+            VendasService vendasService = new VendasService(context);
+            vendasService.ImportarDados();
+
         }
     }
 }

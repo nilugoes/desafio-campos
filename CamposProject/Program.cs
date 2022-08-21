@@ -26,7 +26,7 @@ namespace CamposProject
                 try
                 {
                     var context = services.GetRequiredService<CamposDatabaseContext>();
-                    context.Database.EnsureDeleted();
+                    //context.Database.EnsureDeleted();
                     bool criado = context.Database.EnsureCreated();
                     if (criado)
                     {
