@@ -54,7 +54,7 @@ namespace CamposProject.Controllers
         public IActionResult Create()
         {
             ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente");
-            ViewData["IdProduto"] = new SelectList(_context.Produto, "IdProduto", "IdProduto");
+            ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "IdProduto");
             return View();
         }
 
@@ -72,7 +72,7 @@ namespace CamposProject.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", venda.IdCliente);
-            ViewData["IdProduto"] = new SelectList(_context.Produto, "IdProduto", "IdProduto", venda.IdProduto);
+            ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "IdProduto", venda.IdProduto);
             return View(venda);
         }
 
@@ -90,7 +90,7 @@ namespace CamposProject.Controllers
                 return NotFound();
             }
             ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", venda.IdCliente);
-            ViewData["IdProduto"] = new SelectList(_context.Produto, "IdProduto", "IdProduto", venda.IdProduto);
+            ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "IdProduto", venda.IdProduto);
             return View(venda);
         }
 
@@ -127,7 +127,7 @@ namespace CamposProject.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", venda.IdCliente);
-            ViewData["IdProduto"] = new SelectList(_context.Produto, "IdProduto", "IdProduto", venda.IdProduto);
+            ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "IdProduto", venda.IdProduto);
             return View(venda);
         }
 
