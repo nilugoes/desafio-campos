@@ -69,8 +69,22 @@ namespace CamposProject.Controllers
             {
                 venda.VlrTotalVenda = venda.VlrUnitarioVenda * venda.QtdVenda;
                 _context.Add(venda);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException)
+                {
+                    if (VendaExists(venda.IdVenda))
+                    {
+                        ModelState.AddModelError("IdVenda", "Venda já cadastrada com esse id.");
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
             ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "NmCliente", venda.IdCliente);
             ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "DscProduto", venda.IdProduto);

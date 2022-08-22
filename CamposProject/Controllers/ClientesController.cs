@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CamposProject.Data;
 using CamposProject.Entidades;
+using Microsoft.Data.SqlClient;
+using System;
 
 namespace CamposProject.Controllers
 {
@@ -61,8 +63,23 @@ namespace CamposProject.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(cliente);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException)
+                {
+                    if (ClienteExists(cliente.IdCliente))
+                    {
+                        ModelState.AddModelError("IdCliente", "Cliente já cadastrado com esse id.");
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                
             }
             return View(cliente);
         }

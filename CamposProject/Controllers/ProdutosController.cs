@@ -58,8 +58,22 @@ namespace CamposProject.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(produto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException)
+                {
+                    if (ProdutoExists(produto.IdProduto))
+                    {
+                        ModelState.AddModelError("IdProduto", "Produto já cadastrado com esse id.");
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
             return View(produto);
         }
