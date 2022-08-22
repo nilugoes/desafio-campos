@@ -53,8 +53,8 @@ namespace CamposProject.Controllers
         // GET: Vendas/Create
         public IActionResult Create()
         {
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente");
-            ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "IdProduto");
+            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "NmCliente");
+            ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "DscProduto");
             return View();
         }
 
@@ -67,12 +67,13 @@ namespace CamposProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                venda.VlrTotalVenda = venda.VlrUnitarioVenda * venda.QtdVenda;
                 _context.Add(venda);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", venda.IdCliente);
-            ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "IdProduto", venda.IdProduto);
+            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "NmCliente", venda.IdCliente);
+            ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "DscProduto", venda.IdProduto);
             return View(venda);
         }
 
@@ -89,8 +90,8 @@ namespace CamposProject.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", venda.IdCliente);
-            ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "IdProduto", venda.IdProduto);
+            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "NmCliente", venda.IdCliente);
+            ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "DscProduto", venda.IdProduto);
             return View(venda);
         }
 
@@ -110,6 +111,7 @@ namespace CamposProject.Controllers
             {
                 try
                 {
+                    venda.VlrTotalVenda = venda.VlrUnitarioVenda * venda.QtdVenda;
                     _context.Update(venda);
                     await _context.SaveChangesAsync();
                 }
@@ -126,8 +128,8 @@ namespace CamposProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", venda.IdCliente);
-            ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "IdProduto", venda.IdProduto);
+            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "NmCliente", venda.IdCliente);
+            ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "DscProduto", venda.IdProduto);
             return View(venda);
         }
 

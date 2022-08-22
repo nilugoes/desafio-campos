@@ -25,6 +25,7 @@ namespace CamposProject.Services
             var vendas = System.Text.Json.JsonSerializer.Deserialize<List<Venda>>(jsonAjustado);
             foreach (var venda in vendas)
             {
+                venda.VlrTotalVenda = venda.VlrUnitarioVenda * venda.QtdVenda;
                 context.Vendas.Add(venda);
             }
 

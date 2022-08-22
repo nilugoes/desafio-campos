@@ -20,7 +20,7 @@ namespace CamposProject.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Vendas");
         }
 
         public IActionResult Privacy()

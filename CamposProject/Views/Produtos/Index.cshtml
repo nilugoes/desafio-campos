@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<CamposProject.Entidades.Produto>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Produtos";
 }
 
-<h1>Index</h1>
+<h1>Produtos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">cadastrar novo produto</a>
 </p>
 
 
@@ -29,10 +29,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DscProduto)
+                Descrição do produto 
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VlrProduto)
+                Valor do produto
             </th>
             <th></th>
         </tr>
@@ -48,9 +48,9 @@
                     @Html.DisplayFor(modelItem => item.VlrProduto)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdProduto">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdProduto">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdProduto">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.IdProduto">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdProduto">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdProduto">Excluir</a>
                 </td>
             </tr>
         }
